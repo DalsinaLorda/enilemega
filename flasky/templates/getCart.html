@@ -1,0 +1,68 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<section class="tagline">
+  <div class="container">
+   
+  <div class="search-box">
+   <input class="input-box" type="text" name="" placeholder="Search..">
+    <a class="btbbn" href="#"> 
+      <i style="font-size:20px; color: white;" class="fas fa-search"></i>
+    </a>
+  </div>
+  <div class="dropdown" style="float:right;">
+      <button class="dropbtn">Brands</button>
+      <div class="dropdown-content">
+        {% for brand in brandz %}
+        <a href="{{url_for('brand', brand=brand.name)}}">{{ brand.name }}</a>
+        {% endfor %}
+      </div>
+     </div>
+       
+      <div class="dropdown" style="float:right;">
+         <button class="dropbtnbest">Categories</button>
+         <div class="dropdown-content">
+           {% for cate in cates %}
+           <a href="{{url_for('category', category=cate.name)}}">{{ cate.name }}</a>
+           {% endfor %}
+         </div>
+        </div>
+      
+
+  </div>
+ </section>
+  <section>
+     
+    <div class="container">
+       
+      <h1 id="heading">All products</h1>
+      
+      <ul id="gallary">
+      
+        {% for brand in bybrand %}
+        <script>
+          var x=  document.getElementById('heading');
+          x.textContent= " All {{brand.brand}} product(s)";
+        </script>
+          <div class="image-card">        
+             <img src="{{url_for('static', filename='shoppics/' + brand.image)}}" alt="{{brand.name}}"> 
+             <span class="left"><a href="{{url_for('user', brand_name= brand.author.brand_name)}}"><img  style=" width: 105%; height: 105%;border-radius: 50%;" src="{{url_for('static', filename='profile_pics/' + brand.author.image_file)}}"></a></span>
+             <span><i class="fas fa-tags"> {{brand.price}}$</i></span>
+             <div class="dd">
+              <button class="button"><a href="{{url_for('post', post_id=brand.id)}}">Details</a></button>
+              <button class="button"><a href="#">Book</a></button>  
+            </div>
+           </div>
+        {% endfor %}
+      
+      </ul>
+    </div>
+  </section>
+  <footer>
+    <p>© 2020 Copyright: eNile </p>
+  </footer>
+{% endblock content %}
+
+
+
+  

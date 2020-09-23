@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% if title %} 
+<title>flaskblog-{{title}}</title>
+	{% else %} 
+<title>flaskblog</title>
+  {% endif%}
+ <meta name="viewport" content="width=device-width, initial-scakle=1.0">
+<link href="/static/css/all.css" rel="stylesheet"> <!--load all styles --> 
+<style type="text/css">
+* {
+   box-sizing: border-box;
+ }
+html, body{
+  margin:0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  font-size: 15px;
+  color: #666;
+  line-height: 1.6em;
+}
+a{
+  color: #666;
+  text-decoration: none;
+}
+.container{
+  width:95%;
+  margin: auto;
+  overflow: auto;
+}
+@media screen and (max-width:566px){
+.container{
+  width: 100%;
+  }
+
+}
+
+header{
+  background: #333;
+  min-height: 55px;
+  color:#fff;
+
+}
+header a{
+  color: #fff;
+}
+.logo{
+  float:left;
+  width: 30%;
+  margin-top: 15px;
+}
+.nav-bar{
+  float:right;
+  width:70%;
+
+}
+nav ul{
+  float: right;
+
+}
+nav li{
+  list-style: none;
+  float:left;
+  padding: 0 10px;
+
+}
+nav a{
+  color: #fff;
+  padding-bottom:5px; 
+}
+nav li.current a, nav a:hover{
+  color: #03899c;
+  border-bottom: #03899c 3px solid;
+}
+@media screen and (max-width:566px) {
+  .container{
+    width:100%;
+  }
+  .logo{
+    float:left;
+    width:10%;
+    padding: 0 0 0 15px;
+  }
+  .nav-bar{
+    float: none;
+    width: 100%;
+  }
+  
+}
+@media screen and (max-width:360px){
+  .container{
+    width:100%;
+  }
+  .logo{
+    float:left;
+    width:8%;
+    padding: 0 0 0 10px;
+  }
+  .nav-bar{
+    float: none;
+    width:100%;
+  }
+
+}
+
+
+
+.search-box{
+  position: absolute;
+  margin: 0;
+  padding: 0; 
+  border-radius: 0 40px 40px 0;
+  background-color: #2f3640;
+  height: 40px;
+  
+}
+.input-box{
+  border: none;
+  outline: none;
+  background: none;
+  float: left;
+  padding: 0;
+  color: #fff;
+  font-size: 16px;
+  transition: 0.4s all;
+  line-height: 40px;
+  width: 0px;
+}
+.btbbn{
+  color: #1abc9c;
+  float: right;
+  text-decoration: none;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  border: 1px solid #2f3640;
+  border-radius: 50%;
+}
+.search-box:hover .input-box{
+  width: 180px;
+}
+.search-box:hover .btbbn{
+  background-color: #03899c;
+
+}
+
+.section{
+  padding: 20px 0;
+  overflow: hidden;
+}
+.tagline{
+  background: #03899c;
+  color: #fff;
+  min-height: 40px;
+}
+.tagline h1{
+  text-align: center;
+  font-size: 35px;
+}
+.form-container{
+  margin: 20px;
+  padding: 15px;
+  background-color:  #03899c;
+  color: white;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3), 0 7px 21px 0 rgba(0, 0, 0, 0.20);
+  border-radius: 20px;
+}
+.input-cnt{
+  display: flex;
+  margin-bottom: 15px; 
+ 
+}
+.input-cnt:last-child{
+  margin-bottom: 0px;
+}
+
+.input-cnt > input[type="text"], .input-cnt > [ type="password"], .input-cnt > input[type="file"]{
+  outline: none;
+  border: none;
+  padding: 10px;
+  border: 1px solid lightgrey;
+  width: 100%;
+  border-top-right-radius: 20px; 
+  border-bottom-right-radius: 20px; 
+}
+
+.input-cnt > input[type="submit"]{
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  width: 75%;
+  margin: 0 auto;
+  font-size: 105%;
+  padding: 8px;
+  color: #0076ff;
+  background: white;
+  transition-duration: .5s; 
+
+}
+.form-label{
+  color: white;
+  min-width: 40px;
+  padding: 10px;
+  text-align: center;
+  background: lightgrey;
+  margin: 8px auto;
+  color: #0076ff;
+  border-radius:8px 0 0 8px; 
+}
+.form-label:hover{
+  border: none;
+}
+.form-control{
+  background-color: white;
+  width: 75%;
+  padding: 8px 10px;
+  display:inline-block;
+  border: 1px solid #03899c;
+  border-radius: 0 8px 8px 0;
+  box-sizing: border-box;
+}
+.form-control:hover{
+  border:0;
+}
+.form-controller{
+  background: white;
+  width: 75%;
+  padding: 8px 10px;
+  visibility: none;
+  border: 1px solid #03899c;
+  border-radius: 0 8px 8px 0;
+  box-sizing: border-box;
+}
+/*button
+*/
+.dropbtn {
+    background-color: #2f3640;
+    color: #f7f8f8;
+    padding: 5px;
+    margin: 0px;
+    border-radius: 0px 0 0px 0px;
+    height:  40px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+.dropbtnbest {
+    background-color: #2f3640;
+    color: #f7f8f8;
+    padding: 5px;
+    margin: 0px;
+    border-radius: 15px 0 0px 15px;
+    height:  40px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+
+.dropdown {
+   
+    display: block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    padding: 2px;
+    right: 10px;
+    background-color: rgb(240, 231, 231);
+    min-width: 10%;
+    z-index: 1;
+    border-radius: 0 0 15px 15px;
+
+  
+}
+
+.dropdown-content a {
+    color: #03899c;
+    padding: 2px 1px 0px 2px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display:block;
+}
+
+
+   /*endbutton
+   */
+   /*forms*/
+
+      /*//this for registrationform*/
+.profile-card{
+	width: 100%;
+	height: 30%;
+	margin: auto;
+	background: #fff;
+	box-shadow: 0 4px 10px 0 rgba(255, 254, 254, 0.5);
+
+  }
+  .images-contain{
+	position: relative;
+
+  }
+  .main-container{
+	padding: 20px;
+
+  }
+.lower-container{
+  height: 90px;
+  background: rgb(255, 255, 255);
+  padding: 20px;
+  padding-top:60px; 
+  text-align: center;
+}
+.lower-container h3, h4{
+  box-sizing: border-box;
+  line-height: .6;
+  font-weight: lighter;
+}
+.lower-container h4{
+  color: #7f00ff;
+  opacity: .6;
+  font-weight: bold;
+
+}
+.lower-container p{
+  font-size: 16px;
+  color: gray;
+  margin-bottom: 30px;
+} 
+@media screen and (max-width:682px){
+  .card-container{
+    width: 100%;
+  }
+  .image-container{
+    width: 40%;
+    height: auto;
+    transform: translate(300px, 80px); 
+  }
+  .image-container img{
+    width: 40%;
+    height: auto;
+    transform: translate(300px, 80px); 
+  }
+}
+
+.btn-btn{
+  padding: 12px 20px;
+  background: #03899c;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  font-size: 10px;
+  text-decoration: none;
+  transition: all .3s ease-in;
+  opacity: 0.6;
+}
+.btn-btn-danger{
+  padding: 12px 20px;
+  background: rgba(253, 0, 0, 0.4);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  font-size: 10px;
+  text-decoration: none;
+  transition: all .3s ease-in;
+
+}
+  
+.btn-form {
+  margin: 150px;
+  padding: 10px 18px;
+  background: #69c6fc;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  font-size: 12px;
+  text-decoration: none;
+  transition: all .3s ease-in;
+}
+
+.btn-form:hover{
+  color: black;
+}
+.btn-btn:hover{
+  background:  rgba(128,128,128, 0.4);
+  color:  #03899c;
+  
+}
+.btn-btn-danger:hover{
+  background: rgba(253, 0, 0, 0.1);
+  color:  #03899c;
+  
+}
+/*gallery organization*/
+#gallary{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.image-card{
+  display: block;
+  float: left;
+  width: 16%;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.30), 0 11px 8px rgba(0,0,0,0.22);
+  cursor: pointer;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin: 5px;
+  position: relative;
+}
+#gallary img{
+  height:230px;
+  width: 100%;
+  margin: 0px auto;
+  border-radius: 8px 8px 0 0px;
+}
+span{
+  padding: 2px;
+  position: absolute;
+  top: 200px;
+  left: 10px;
+  color: rgb(5, 47, 53);
+  opacity: 0.8;
+  background: rgb(240, 231, 231);
+  border-radius: 5px;
+}
+.left{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border: 1.4px solid #03899c;
+  width: 12%;
+  height: 12%;
+  border-radius: 50%;
+}
+@media screen and (max-width:566px){
+  #gallery{
+    width: 100%;
+  }
+  .image-card{
+    border-radius: 0px;
+    margin: 0px auto;
+    width:100%;
+    float:none;
+    box-shadow:none;
+  }
+  #gallary img{
+    width:100%; 
+    border-radius: 0px;
+  }
+
+  .button{
+    margin:5px 30px 5px 30px;
+    width: 25%;
+  }
+}
+
+#gallary-2{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.image-card-2{
+  display: block;
+  float: left;
+  width: 16%;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.30), 0 11px 8px rgba(0,0,0,0.22);
+  cursor: pointer;
+  border-radius: 8px;
+  box-sizing: border-box;
+  margin: 5px;
+  position: relative;
+}
+#gallary-2 img{
+  height:230px;
+  width: 100%;
+  margin: 0px auto;
+  border-radius: 8px 8px 0 0px;
+}
+@media screen and (max-width:566px){
+  #gallery-2{
+    width: 100%;
+  }
+  .image-card-2{
+    margin: 6px 0px 0px 8px;
+    width: 46%;
+    float: left;
+    box-shadow: 0 1px 15px rgba(145, 107, 107, 0.3), 0 11px 8px rgba(0,0,0,0.22);
+  }
+  #gallary-2 img{
+    width:100%; 
+  }
+
+  .button{
+    margin:5px 30px 5px 30px;
+    width: 25%;
+  }
+}
+
+
+
+button{
+  margin: 0 0 5px 15px;
+  padding: 5px 20px 5px 20px;
+  background-color: rgb(240, 231, 231);
+  cursor: pointer;
+  border-style: none;
+  border-radius: 6px;
+
+ 
+}
+.button:hover{
+  background: transparent;
+  color: #7f00ff;
+}
+.button a{
+  font-family: sans-serif;
+  color: gray;
+  
+  float: left;
+  text-align: left;
+
+}
+
+button-2{
+  margin: 0 auto;
+  padding: 5px 20px 5px 20px;
+  background-color: rgb(240, 231, 231);
+  cursor: pointer;
+  border-style: none;
+  border-radius: 6px;
+  box-shadow: 0 15px 30px rgba(187, 167, 167, 0.3), 0 11px 8px rgba(110, 94, 94, 0.22);
+ 
+}
+.button-2:hover{
+  background: transparent;
+  color: #7f00ff;
+}
+.button-2 a{
+  font-family: sans-serif;
+  color: gray;
+  
+  float: left;
+  text-align: left;
+
+}
+
+table {
+    width:100%;
+}
+table, th, td {
+    text-align: center;
+    border: none; 
+    border-collapse: collapse;
+}
+table#t01 tr:nth-child(even) {
+    background-color: #eee;
+}
+table#t01 tr:nth-child(odd) {
+   background-color:#fff;
+}
+table#t01 th {
+    background-color: #03899c;
+    color: white;
+    opacity: 0.4;
+    margin: 0;
+    padding: 0;
+
+
+}
+table img {
+  max-width: 30px;
+  max-height: 40px;
+  border: none;
+}
+
+@media screen and (max-width:414px){
+  table{
+    width:100%;
+  }
+  table, th, td{
+    font-size: 12px;
+    text-align: none;
+  }
+  table img{
+    max-width:20px;
+    max-height: 30px;
+  }
+  .btn-btn{
+    width: 0%;
+    padding: 3px;
+  }
+  .btn-btn-danger{
+    width: 40%;
+    padding: 3px;
+  }
+}
+
+
+.contenter{
+  content: "";
+  display: block;
+  clear: both;
+}
+.contenter> div{
+  height: 465px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  float: left;
+  border-right: 1px solid white;
+  background: white; 
+
+}
+.smallbox{
+  position: relative;
+  width: 40%
+}
+.image-control{
+  position: absolute;
+  width: 100%;
+
+}
+.image-control img{
+  width: 50%;
+ }
+.row img{
+  
+  margin: 0 auto;
+ } 
+.bigbox{
+  width: 60%;
+  float: left;
+}
+.bigbox p{
+  float: none;
+
+}
+.fuits{
+  outline: none;
+  border: none;
+  background: #19bcd1;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+@media screen and (max-width:414px){
+  .fuits{ 
+   width: 40%;
+  }
+}
+@media screen and (max-width:414px){
+  .smallbox{
+    width: 100%;
+  }
+  .bigbox{
+    width: 90%;
+    float: none;
+  }
+  .bigbox p{
+    float: none;
+  }
+  .btn-btn{
+    width: 20%;
+  }
+}
+
+select{
+  outline: none;
+  border: none;
+  background:white;
+  color: #0389cc;
+  padding: 10px;
+  width: 50%;
+  margin: 1px auto;
+  
+}
+.badge{
+  padding: 2px;
+  color: rgb(5, 47, 53);
+  opacity: 0.8;
+  background: rgb(201, 161, 161);
+  border-radius: 5px;
+  top: 5px;
+  width: 5px;
+
+}
+
+footer{
+  background: #0389cc;
+  height: 50px;
+  color: #fff;
+  text-align: center;
+  padding-top: 5px;
+  bottom: 0px;
+}
+  
+</style>
+</head>
+<body>
+  <header>
+    <div class="container">
+     <h1 class="logo"><i>eNile</i></h1>
+    
+    <nav class="nav-bar">
+      <ul>
+        <li><a href="{{ url_for('home')}}"><i style="font-size: 20px;" class="fas fa-home"></i></li>
+       {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('messages')}}"><i style="font-size: 20px;" class="far fa-bell"></i></a>
+          {% set new_messages = current_user.new_messages() %}
+          {% if new_messages %}
+          <span class="badge"></span>
+          {% endif %}
+        </li>
+        <li><a href="{{ url_for('getCard')}}"><i style="font-size: 20px;" class="fas fa-shopping-cart"> </i>({{session['Shoppingcart']|length}})</a></li> 
+        <li><a href="{{ url_for('menu')}}"><i style="font-size: 25px;" class="fas fa-align-justify"></i></a></li>
+       {% else %}
+        <li><a href="{{ url_for('login')}}"><i class="fa fa-sign-out-alt">Login</i></a></li>
+        <li><a href="{{ url_for('registry')}}"><i class="fa fa-user-plus"></i></a></li>
+       {% endif %}
+       </ul>
+      </nav>
+    </div>
+  </header>
+ {% block content %}{% endblock %}

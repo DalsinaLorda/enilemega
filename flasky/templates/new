@@ -1,0 +1,31 @@
+<div class="profile-card">
+			<div class="images-contain">
+				  <img src="{{ image_file }}" style="width: 100%; height: 40%;">
+				<div class="title">
+					<h2>Jone </h2>
+				</div>
+				<div class="main-container">
+					<p><i class="fas fa-plus"> Easy Tutorials</i></p>
+					<p>Havel, INN</p>
+					<p>havel@gmail.com</p>
+					<p>0923571709</p>
+					<hr>
+					<a href="#" class="btn-btn">Edit profile</a>
+                     <form method="POST", action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}  
+                <p>
+                    <i class="fas fa-photo">{{form.picture }}</i>
+                    {{form.submit}}
+                </p>                                                   
+             </form>             
+					
+				</div>
+			</div>
+		</div>
+               <form method="POST", action="" enctype="multipart/form-data">
+              {{ form.hidden_tag() }}  
+              <p>
+                  <i class="fas fa-photo">{{form.picture }}</i>
+                  {{form.submit}}
+              </p>                                                   
+           </form>   

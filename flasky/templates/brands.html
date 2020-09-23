@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+  <section class="tagline">
+   <div class="container">
+    <h1>View our market <a href="#" class="btn-btn">Add brand</a>
+    </h1>
+   </div>
+  </section>
+  <section>
+    <div class="container">
+       <h1 id="heading">All brands</h1>
+      <ul id="gallary">
+       
+         <table id="t01">
+             <tr>
+                <th>serial</th>
+                <th>Brand</th>    
+                <th></th>
+                <th></th>
+             </tr>
+            {% if brands %}
+            {% for brand in show_brands  %}
+             <tr>
+               <td>{{brand.id}}</td>
+               <td>{{brand.name}}</td> 
+               <td><a class="btn" href="">Edit</a></td>
+               <td><a class="btn-btn" href="">Delete</a></td>
+             </tr>
+           {% endfor %} 
+           {% else %}
+           {% for category in show_categories  %}
+           <tr>
+             <td>{{category.id}}</td>
+             <td>{{category.name}}</td> 
+             <td><a class="btn" href="">Edit</a></td>
+             <td><a class="btn-btn" href="">Delete</a></td>
+           </tr>
+           {% endfor %} 
+           {% endif %}
+          
+           </table>
+
+                
+      </ul>
+    </div>
+  </section>
+  <footer>
+    <p> copyright $copy. all rights Reserved </p>
+  </footer>
+{%endblock content %}

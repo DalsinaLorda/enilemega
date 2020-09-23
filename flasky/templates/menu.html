@@ -1,0 +1,49 @@
+
+{% extends "layout.html" %}
+{% block content %}
+ 
+ 
+  <section>
+    <div class="container">
+      <table style="width: 20%;" id="t01">
+
+      
+         <tr>
+          <td><a href="{{ url_for('account')}}"><img style="border-radius: 50%; border: 1.5px solid #03899c; width: 130px; height: auto;" src="{{url_for('static', filename='profile_pics/' + current_user.image_file)}}"></a></td>
+          <td><h3><a href="{{ url_for('account')}}"><b>{{current_user.brand_name}}</b><br>
+            <small>View your profile</small></h3></a>
+          </td>
+         </tr> 
+      </table>  
+      <div>
+       
+      </div>  
+      <div>
+      <h2><a href="{{ url_for('admin')}}"><i class="fas fa-shopping-cart"> Card</i></a></h2>
+      <h2><a href="{{ url_for('invoices')}}"><i class="fas fa-shopping-bag"> invoices</i></a></h2><hr>
+      <h2><a href="{{ url_for('new_post')}}"><i class="fas fa-plus"> Add Item</i></a></h2>
+      <h2><a href="{{ url_for('shops')}}"><i class="fas fa-user-plus"> Follow Shops</i></a></h2>
+      <h2><a href="{{ url_for('newbrand')}}"><i class="fas fa-plus"> Brand</i></a></h2>
+      <h2><a href="{{ url_for('newcategory')}}"><i class="fas fa-plus"> Category</i></a></h2>
+      <h2><i class="fas fa-chart-line"> Statistics</i></h2>
+      <h2><i class="fas fa-user-secret"> Privacy policy</i></h2>
+      <h2><a href="{{url_for('nearbyshops', location= current_user.location)}}"><i class="fas fa-map-marker-alt"> NearByShops</i></a> </h2>
+      <h2><i class="fas fa-hands-helping"> Alliances</i></h2>
+      <h2><i class="fas fa-cogs"> Settings</i></h2>
+      <h2><i class="fas fa-money-check-alt"> Havel Pay</i></h2>
+      <h2><i class="fa fa-address-card"> About Us</i></h2>
+      <h2><a href="{{ url_for('logout')}}"><i class="fa fa-sign-out-alt"> LogOut</i></a></h2>
+   
+                
+    
+    </div>
+    </div>
+  </section>
+  <footer>
+    <p> Copyright:HavelSoft. All rights Reserved </p>
+  </footer>
+{%endblock content %}
+
+
+ 
+             

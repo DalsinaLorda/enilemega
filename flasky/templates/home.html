@@ -1,0 +1,76 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<section class="tagline">
+  <div class="container">
+   
+  <div class="search-box">
+   <input class="input-box" type="text" name="" placeholder="Search..">
+    <a class="btbbn" href="#"> 
+      <i style="font-size:20px; color: white;" class="fas fa-search"></i>
+    </a>
+  </div>
+   
+  <div class="dropdown" style="float:right;">
+   <button class="dropbtn">Brands</button>
+   <div class="dropdown-content">
+     {% for brad in brandz %}
+     <a href="{{url_for('brand', brand=brad.id)}}">{{ brad.name }}</a>
+     {% endfor %}
+   </div>
+  </div>
+    
+   <div class="dropdown" style="float:right;">
+      <button class="dropbtnbest">Categories</button>
+      <div class="dropdown-content">
+        {% for cat in cates %}
+        <a href="{{url_for('category', category=cat.name)}}">{{ cat.name }}</a>
+        {% endfor %}
+      </div>
+     </div>
+   
+
+  </div>
+ </section>
+  <section>
+     
+    <div class="container">
+      <h1 id="heading">ho</h1>
+      <ul id="gallary">
+        {% for post in posts %}
+          <div class="image-card">        
+            <a href="{{url_for('post', post_id=post.id)}}"> <img src="{{url_for('static', filename='shoppics/' + post.image)}}" alt="{{post.name}}"> </a>
+                
+             <span class="left"><a href="{{url_for('user', brand_name= post.author.brand_name)}}"><img  style=" width: 105%; height: 105%;border-radius: 50%;" src="{{url_for('static', filename='profile_pics/' + post.author.image_file)}}"></a></span>
+             <span><i class="fas fa-tags"> {{post.price}}$</i></span>
+             <div class="dd">
+              
+
+              <form action="{{url_for('AddCart')}}" method="post">
+                <input type="hidden" name="product_id" value="{{post.id}}">
+                <button class="button"><a href="{{url_for('post', post_id=post.id)}}">Details</a></button>
+                <button type="submit" class="button"><a > Cart</a></button>
+                <input type="hidden" name="quantity" id="" value="1" >
+                {% set colors = post.color.split(',') %}
+                
+                <select  name="colors" style="display: none;" id="">
+                  {% for color in colors %}
+                  {% set col = color.split(':') %}
+                  <option value="{{col[0]}}">{{col[0]|capitalize}}</option>
+                  {% endfor %}
+                </select>
+              </form>
+            </div>
+           </div>
+        {% endfor %}    
+      </ul>
+    </div>
+  </section>
+  <footer>
+    <p>© 2020 Copyright: eNile </p>
+  </footer>
+{%endblock content %}
+
+
+
+  

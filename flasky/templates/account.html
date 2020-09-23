@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+<div>
+  <div class="profile-card">
+    <div class="images-contain">
+        <img src="{{ image_file }}" style="width: 100%; height: 200px;">
+      
+     
+      <div class="main-container">
+        <p><i class="fas fa-user"> {{ current_user.brand_name }}</i></p>
+        <p><i class="fas fa-count"> {{ current_user.followers.count()}} Followers,{{ current_user.followed.count()}} Following</i></p>
+        
+        <p><i class="fas fa-star"> {{ current_user.rating  }}</i></p>
+        <hr>
+        <a href="#" class="btn-btn">Edit profile</a>
+                      
+        
+      </div>
+    </div>
+  </div>
+   <section>
+      <div class="container">
+          <h1 id="heading"></h1>
+          {% for post in posts %}
+          <ul id="gallary-2">
+       
+          <div class="image-card-2">            
+            <a href="{{url_for('post', post_id=post.id)}}"> <img src="{{url_for('static', filename='shoppics/' + post.image)}}" alt="{{post.name}}"></a>
+             <span>price${{post.price}}</span>
+             <div class="dd">
+             
+              <button class="button-2"><a href="#">Add to cart</a></button>  
+            </div>
+          </div>
+     </ul>
+    
+     {% endfor %}
+    </div> 
+ </section>
+
+ 
+ <footer>
+   <p>@2020 Copyright: eNile Stores </p>
+ </footer>
+ </div>
+{%endblock content %}
+

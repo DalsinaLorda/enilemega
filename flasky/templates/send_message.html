@@ -1,0 +1,33 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<section class="tagline">
+  <div class="container">
+   
+  <div class="search-box">
+   <input class="input-box" type="text" name="" placeholder="Search..">
+    <a class="btbbn" href="#"> 
+      <i style="font-size:20px; color: white;" class="fas fa-search"></i>
+    </a>
+  </div>
+  <h1></h1>
+  <form method="POST", action="{{url_for('send_message', recipient = user.brand_name)}}" >
+    {{ form.hidden_tag() }}
+      
+        <div class="input-cnt">
+          {{form.message.label (class="form-label")}}
+          {{form.message  (class= "form-control")}}<br>
+         </div>
+
+        <div class="input-cnt">
+          {{form.submit (class= "form-label")}}           
+         </div>    
+    </form>
+  <footer>
+    <p>© 2020 Copyright: eNile </p>g
+  </footer>
+{%endblock content %}
+
+
+
+  

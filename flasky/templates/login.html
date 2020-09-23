@@ -1,0 +1,27 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<img src="static/logos/inbuilt.png" style="width: 80px; border-radius:50%; margin-left: auto; margin-right: auto; display: block;">
+ <h2 style="text-align:center">login</h2>
+    <div class="form-container">
+        <form method="POST", action="">
+            {{ form.hidden_tag() }}
+            <div class="input-cnt">
+                 {{form.email.label (class="form-label")}}
+                 {{form.email  (class= "form-control")}}<br>
+                </div>          
+            <div class="input-cnt">
+                {{form.password.label  (class="form-label")}}
+                {{form.password (class= "form-control")}}
+            </div>          
+            <div class="input-cnt"> 
+                {{form.submit (class="btn-btn")}}
+            </div>                                                   
+        </form>                   
+    </div>
+      <div>
+        <small >
+            Dont have an account? <a href="{{url_for('registry')}}"><button class="btn-btn">sign up</button> </a>
+        </small>
+      </div>   
+{% endblock content %}

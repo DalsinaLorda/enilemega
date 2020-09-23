@@ -1,0 +1,75 @@
+
+{% extends "layout.html" %}
+{% block content %}
+  <div class="contenter">
+    <div class="smallbox">
+
+  	 <div  id="s_image">
+       <img  src="{{url_for('static', filename='shoppics/' + post.image)}}"   width="290" height="300">
+     </div> 
+
+      <div id="b_image" class="row">
+        <img  src="{{url_for('static', filename='shoppics/' + post.image)}}" style="border-radius: 10px;" width="70" height="100">
+     
+        <img  src="{{url_for('static', filename='shoppics/' + post.image_1)}}"  style="border-radius: 10px;"  width="70" height="100">
+    
+        <img  src="{{url_for('static', filename='shoppics/' + post.image_2)}}"  style="border-radius: 10px;"  width="70" height="100">
+      </div>
+      
+    </div>
+   
+    <div class="bigbox">
+     <b >Name:{{post.name}}</b>
+     <hr>
+     <p> Find shop<a href="{{url_for('user', brand_name= post.author.brand_name )}}">: <i class="fas fa-location-arrow"></i>  {{post.author.brand_name}}</a> </p>
+     <p><i class="fas fa-tags"></i> Price tag    {{post.price}}$</p>
+     <p><i class="fas fa-box"></i> Discount:{{post.discount}}%</p>
+     
+  	 <b>Description:</b>
+     <p >{{post.description}}  {{post.date_posted.strftime('%Y-%m-%d')}}</p>
+
+  
+
+     {% if post.author == current_user %}
+    <div>
+      <button><a href="{{url_for('edit_post', post_id=post.id)}}">Edit</a></button>
+      <button><a href="{{url_for('delete_post', post_id=post.id)}}">Delete</a></button>
+      {% endif %}
+    </div>
+    <form action="{{url_for('AddCart')}}" method="post">
+      <input type="hidden" name="product_id" value="{{post.id}}">
+     
+      
+      <input class="fuits" type="number"  name="quantity" id="" value="1" min="1" max="{{post.stock}}">
+      {% set colors = post.color.split(',') %}
+      
+      <select name="colors" id="" class="fuits" >
+        <option value="">choose color</option>
+        {% for color in colors %}
+        {% set col = color.split(':') %}
+        <option value="{{col[0]}}">{{col[0]|capitalize}}</option>
+        {% endfor %}
+      </select>
+      <button type="submit" class="btn-btn">Book</button>
+    </form>
+    
+  	
+ </div>
+ </div>
+ <script>
+    var s_image= document.getElementById('s_image');
+    var b_image = document.getElementById('b_image').getElementsByTagName('img');
+     for(var i = 0; i < b_image.length; i++ ) {
+     b_image[i].addEventListener('click', full_image);
+    }
+    function full_image(){
+     var ImageSRC = this.getAttribute('src');
+     s_image.innerHTML="<img src ="+ImageSRC+" width='290' height='300'>"; 
+    }
+ </script>
+{% endblock content %}
+
+ 
+
+
+ 

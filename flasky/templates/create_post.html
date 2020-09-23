@@ -1,0 +1,79 @@
+
+{% extends "layout.html" %}
+{% block content %}
+  
+    <h2 style="text-align:center">{{ legion }}</h2>
+    <div class="form-container">
+        <form method="POST", action="{{url_for('new_post')}}" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+              
+                <div class="input-cnt">
+                 {{form.name.label (class="form-label")}}
+                 {{form.name  (class= "form-control")}}<br>
+                </div>
+
+                <div class="input-cnt">
+                 {{form.price.label (class="form-label")}}
+                 {{form.price (class= "form-control")}}<br>
+                </div>
+
+                <div class="input-cnt">
+                 {{form.discount.label (class="form-label")}}
+                 {{form.discount (class= "form-control")}}<br>
+                </div>
+                
+                <div class="input-cnt">
+                 {{form.stock.label (class="form-label")}}
+                 {{form.stock (class= "form-control")}}<br>
+          		  </div>
+
+                <div class="input-cnt">
+                 {{form.color.label (class="form-label")}}
+                 {{form.color (class= "form-control")}}<br>
+                </div>
+               
+                <div class="input-cnt">
+                 {{form.description.label (class= "form-label")}}
+                 {{form.description (class= "form-control")}}<br>
+                </div>
+               
+                
+                  <select name="brand" id="brand" required>
+                   <option value="" >Select a brand</option>
+                  {% for brand in brandis %}
+                   <option value="{{brand.name}}">{{brand.name}}</option>
+                  {% endfor %}                    
+                  </select>
+              
+                   
+                    <select name="category" id="category" required>
+                      <option value="">Select a category</option>
+                      {% for category in categoryis %}
+                      <option value="{{category.name}}">{{category.name}}</option>
+                      {% endfor %}            
+                    </select>
+               
+               
+               
+              
+                  <div class="input-cnt" >
+                  {{form.photo (class= "form-control" )}} 
+                  </div>
+              <div class="input-cnt">
+                {{form.photo_1 (class= "form-control")}}
+              </div> 
+              <div class="input-cnt">  
+                {{form.photo_2 (class= "form-control")}}
+              </div>    
+           	  <div class="input-cnt">
+       	    	 {{form.submit (class= "form-label")}}           
+           	  </div>                                                     
+        </form>                   
+    </div>
+    
+{% endblock content %}
+ 
+
+
+
+ 

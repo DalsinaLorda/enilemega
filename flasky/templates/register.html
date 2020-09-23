@@ -1,0 +1,85 @@
+
+{% extends "layout.html" %}
+{% for message in get_flashed_messages() %}
+<div style="background: darkslategray;" class="">
+  {{ message }}
+ </div>
+ {% endfor %}
+  
+{% block content %}
+<img src="static/logos/inbuilt.png" style="width: 80px; border-radius:50%; margin-left: auto; margin-right: auto; display: block;">
+
+  <h2 style="text-align:center">sign up</h2>
+  <div class="form-container">
+  <form method="POST", action="">
+      {{ form.hidden_tag() }}
+     
+    <div class="input-cnt">
+      {{form.brand_name.label (class="form-label")}}
+      {{form.brand_name (class= "form-control")}}
+    </div>
+       
+     <div class="input-cnt">
+      {{form.username.label (class="form-label")}}
+      {{form.username (class= "form-control")}}
+    </div>
+     <div class="input-cnt">
+      {{form.email.label (class="form-label")}}
+      {{form.email (class= "form-control")}}
+    </div>
+     <div class="input-cnt">
+      {{form.country.label (class="form-label")}}
+      {{form.country (class= "form-control")}}
+    </div>
+     <div class="input-cnt">
+      {{form.location.label (class="form-label")}}
+      {{form.location (class= "form-control")}}
+    </div>
+   
+      {{form.latitude (class= "form-control")}}
+      {{form.longitude (class= "form-control")}}
+   
+     <div class="input-cnt">
+      {{form.contact.label (class="form-label")}}
+      {{form.contact (class= "form-control")}}
+    </div>
+     <div class="input-cnt">
+      {{form.credit_card.label (class="form-label")}}
+      {{form.credit_card (class= "form-control")}}
+    </div>                                             
+    <div class="input-cnt">
+      {{form.password.label (class="form-label")}}
+      {{form.password (class= "form-control")}}
+    </div> 
+     <div class="input-cnt">
+      {{form.confirm_password.label (class="form-label")}}
+      {{form.confirm_password (class= "form-control")}}
+    </div>
+     <div class="input-cnt"> 
+        {{form.submit (class="btn-btn")}}
+      </div>                                                   
+  </form>                   
+  </div>
+      <div>
+          <small>
+                Already have an account? <a href="{{url_for('login')}}"><button class="btn-btn">login here </button> </a>
+          </small>
+      </div>
+      <script>
+        if (navigator.geolocation){
+          navigator.geolocation.getCurrentPosition(
+            function(postion){
+              var lat = postion.coords.latitude;
+              var long = postion.coords.longitude;
+              console.log(lat +','+ long)
+             
+              document.getElementById('latitude').value=lat;
+              document.getElementById('longitude').value=long;
+            }
+          )
+        }
+        else{
+          console.log('Geolocation not supported in your browser!');
+        }
+      </script>   
+{% endblock content %}

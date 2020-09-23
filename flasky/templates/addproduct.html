@@ -1,0 +1,54 @@
+
+{% extends "layout.html" %}
+{% block content %}
+  <div class="postcontent">
+	  <div class="card-container">
+    <div class="form-container">
+        <form method="POST", action="", enctype="multipart/form-data">
+           {{ form.hidden_tag() }}
+              <p>
+                {{form.name}}
+                {{form.name.label}}<br>
+
+                {{form.price}}
+                {{form.price.label}}<br>
+
+                {{form.discount}}
+                {{form.discount.label}}<br>
+
+                {{form.stock}}
+                {{form.stock.label}}<br>
+
+                {{form.color}}
+                {{form.color.label}}<br>
+
+                {{form.brand}}
+                {{form.brand.label}}<br>
+
+                {{form.category}}
+                {{form.category.label}}<br>
+
+                {{form.discription}}
+                {{form.discription.label}}<br>
+            
+              <p>   
+                {{form.image_5}}
+                  
+                 
+                {{form.image_2}}
+                    
+                 
+                {{form.image_3}}
+                   
+               </p>  
+                {{form.submit}}
+            </p>                                                   
+        </form>                   
+    </div>
+  </div>   
+ </div>
+{% endblock content %}
+ 
+
+
+ 

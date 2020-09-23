@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block content %}
+
+   <section>
+    <div class="container">
+      <h1 id="heading">{{legion}}</h1>
+      <ul id="gallary">
+        {% if nearbyshops %}
+        <div id="map" class="">
+          <h2>Geolocation feature coming soon.! Thanks</h2>
+          {% for nearbyshop in nearbyshops %}
+            <p>{{nearbyshop.brand_name}}<br>{{nearbyshop.location}}</p>
+          {% endfor %}
+        </div>
+        <script>
+          if (navigator.geolocation){
+            var img = new Image();
+            img.src = "http://maps.googleapis.com/maps/api/staticmap?center=' +{{nearbyshops.address}}+' &zoom=13&size=800x400&sensor=false";
+            $('#map').html(img);
+            }
+          
+        </script>
+        {% else %}
+         <table>
+          <tr>
+           <th></th>
+          </tr>
+         <tr>
+        {% for shop in shops %}
+          <td style="width: 5%; margin-bottom: 5px; padding: 0px;"><a href="{{url_for('user', brand_name= shop.brand_name) }}"><img style="border-radius: 50%; width: 30px; height: 40px" src="{{url_for('static', filename='profile_pics/' + shop.image_file)}}"> </a></td>
+          <td><b>{{shop.brand_name }}</b><br>
+            <small>{{shop.location}}</small>
+          </td>
+        
+           <td>
+             RATING :<small>{{shop.rating}}</small>
+           </td>
+          <td>
+            {% if not current_user.is_following(shop)%}
+              <a href="{{url_for('follow', brand_name=shop.brand_name) }}" class="btn-btn">Follow</a>  
+              {% else %}
+              <a href="{{url_for('unfollow', brand_name=shop.brand_name) }}" class="btn-btn">unfollow</a>  
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+       </table> 
+       {% endif %} 
+      </ul>
+    </div>
+   </section>
+  <footer>
+    <p> Copyright: HavelSoft </p>
+  </footer>
+{%endblock content %}
