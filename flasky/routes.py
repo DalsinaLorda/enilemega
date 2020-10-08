@@ -28,7 +28,7 @@ def home():
 	users = User.query.all()	
 	brandz=Brand.query.all()
 	cates=Category.query.all()
-	posts=current_user.followed_posts().all()
+	posts= Post.query.all()
 	return render_template('home.html', posts=posts,users=users, brandz=brandz, cates=cates, title = 'Home')
 
 @app.route("/shops", methods=["POST", "GET"])	
